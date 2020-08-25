@@ -9,7 +9,11 @@ try {
   mongoose
     .connect(
       `mongodb+srv://admin-dev-eduardo:${PASSWORD}@cluster0.7ykhl.mongodb.net/${DB}?retryWrites=true&w=majority`,
-      { useNewUrlParser: true, useUnifiedTopology: true }
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useFindAndModify: false,
+      }
     )
     .then(() => {
       console.log("[servidor] Conexión establecida...");

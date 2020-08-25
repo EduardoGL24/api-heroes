@@ -39,12 +39,7 @@ const controller = {
       let fileName = filePath.split("/")[2];
       let fileExt = fileName.split(".")[1];
 
-      if (
-        fileExt == "png" ||
-        fileExt == "jpg" ||
-        fileExt == "jpeg" ||
-        fileExt == "gif"
-      ) {
+      if (fileExt == "png" || fileExt == "jpg" || fileExt == "jpeg") {
         Hero.findByIdAndUpdate(
           heroId,
           { image: fileName },
@@ -63,7 +58,10 @@ const controller = {
         );
       } else {
         fs.unlink(filePath, (err) => {
-          return res.status(200).send({ message: "Extensión no válida" });
+          return res.status(200).send({
+            message:
+              "Extensión no válida, por favor utilice .jpg, .jpeg o .png",
+          });
         });
       }
     } else {
@@ -80,7 +78,7 @@ const controller = {
       if (exists) {
         res.sendFile(path.resolve(pathFile));
       } else {
-        return res.status(400).send({ message: "no existe la imagen" });
+        return res.status(400).send({ message: "No existe la imagen" });
       }
     });
   },
